@@ -15,7 +15,7 @@ $(document).ready(function(){
 });
 */
 
-/*
+
 $(document).ready(function(){
     $(".main").onepage_scroll({
        sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section
@@ -34,7 +34,7 @@ $(document).ready(function(){
        direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".  
     });
 });
-*/
+
 
 $(document).ready(function(){
 
