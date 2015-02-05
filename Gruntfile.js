@@ -31,11 +31,14 @@ module.exports = function(grunt) {
     watch: {
       assemble: {
         files: ['<%= config.src %>/{content,data,templates}/{,*/}*.{md,hbs,yml}'],
-        tasks: ['assemble']
+        tasks: ['assemble'],
       },
-      cssjoin: {
-        files: ['<%= config.src %>/static/{,*/}*.css'],
-        tasks: ['cssjoin','cssmin']
+      concat: {
+        files: [
+          '<%= config.src %>/static/css/*.css',
+          '<%= config.src %>/static/js/*.js'
+        ],
+        tasks: ['concat','cssjoin','cssmin']
       },
       livereload: {
         options: {
@@ -49,6 +52,14 @@ module.exports = function(grunt) {
         ]
       }
     },
+
+    concat: {
+      js: {
+        src: '<%= config.src %>/static/js/*.js',
+        dest: '<%= config.dist %>/assets/js/concat.js'
+      }
+    },
+
 
     cssjoin: {
       join :{
@@ -64,7 +75,7 @@ module.exports = function(grunt) {
       files: [{
         expand: true,
         cwd: '<%= config.src %>/static/css/',
-        src: ['styles.css', 'docs.css'],
+        src: ['styles.css'],
         dest: '<%= config.dist %>/assets/css/',
         ext: '.min.css'
       }]
@@ -117,7 +128,6 @@ module.exports = function(grunt) {
 
   });
   
-
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-cssjoin');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -125,6 +135,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-gh-pages');
 
   grunt.registerTask('server', [
     'assemble',
